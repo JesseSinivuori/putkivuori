@@ -5,7 +5,7 @@ import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
+  output: "hybrid",
   integrations: [
     tailwind({
       applyBaseStyles: false,
@@ -15,7 +15,7 @@ export default defineConfig({
   adapter: vercel({
     imageService: true,
     imagesConfig: {
-      formats: ["image/avif"],
+      formats: ["image/avif", "image/webp"],
       sizes: [320, 640, 1280, 1920],
       domains: [],
     },

@@ -1,6 +1,8 @@
 import type { APIRoute } from "astro";
 import nodemailer from "nodemailer";
 
+export const prerender = false;
+
 const OUR_EMAIL = import.meta.env.PUBLIC_OUR_EMAIL;
 const OUR_PASSWORD = import.meta.env.GOOGLE_APP_PASSWORD;
 
