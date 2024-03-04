@@ -1,0 +1,28 @@
+---
+import "@/globals.css";
+import { Footer } from "@/components/footer";
+import { Toaster } from "@/components/ui/sonner";
+import { Navbar } from "@/components/navbar/navbar";
+---
+
+<html lang="en" class="[color-scheme:dark] dark">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="Putkivuori tarjoaa ammattitaitoista LVI-asennusta ja huoltopalveluita pääkaupunkiseudulla. Luotettavaa ja laadukasta palvelua kaikkiin LVI-tarpeisiisi, olipa kyseessä sitten uusi asennus, korjaus tai huolto."
+    />
+    <title>Putkivuori LVI-asennus ja huolto.</title>
+  </head>
+  <body class="min-h-screen h-full">
+    <header><Navbar client:media="(max-width: 640px)" /></header>
+    <main class="overflow-hidden flex flex-col items-center w-full h-full">
+      <slot />
+    </main>
+    <Footer />
+    <Toaster client:idle />
+  </body>
+</html>
