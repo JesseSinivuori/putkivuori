@@ -3,6 +3,7 @@ import "@/globals.css";
 import { Footer } from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
 import { Navbar } from "@/components/navbar/navbar";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 ---
 
 <html lang="en" class="[color-scheme:dark] dark">
@@ -24,5 +25,6 @@ import { Navbar } from "@/components/navbar/navbar";
     </main>
     <Footer />
     <Toaster client:idle />
+    <SpeedInsights />
   </body>
 </html>
