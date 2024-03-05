@@ -18,6 +18,8 @@ import heroImage from "@/publichero-image.avif";
       src={heroImage}
       alt="Työkaluja puisella pöydällä."
       loading="eager"
+      sizes={`(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 1280px) 1280px, ${heroImage.width}px`}
+      format="avif"
       class="object-cover object-left absolute w-full h-full"
     />
   </Hero>
