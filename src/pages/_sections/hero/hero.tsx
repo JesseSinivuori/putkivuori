@@ -19,7 +19,7 @@ export const Hero = ({ children }: { children: React.ReactNode }) => {
                 src="/logo.png"
                 alt=""
                 loading="eager"
-                className="object-contain w-12 sm:w-[4.5rem]"
+                className="object-contain"
                 width={72}
                 height={72}
               />
