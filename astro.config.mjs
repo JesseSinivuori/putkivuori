@@ -16,7 +16,7 @@ export default defineConfig({
     imageService: true,
     imagesConfig: {
       formats: ["image/avif"],
-      sizes: [320, 640, 1280, 1920],
+      sizes: [320, 640, 1280],
       domains: [],
     },
     webAnalytics: {
