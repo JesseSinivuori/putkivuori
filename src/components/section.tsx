@@ -7,7 +7,7 @@ export const Section = ({
   return (
     <section
       className={cn(
-        "px-4 max-w-[600px] w-full py-8 sm:py-16 flex flex-col gap-8",
+        "px-4 max-w-[600px] w-full py-16 flex flex-col gap-8",
         className,
       )}
       {...props}

@@ -16,20 +16,12 @@ import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { Section } from "@/components/section";
 import { H2 } from "@/components/h2";
+import { formSchema } from "@/schema/contact-form.schema";
 
 const IS_DEV = import.meta.env.DEV;
 
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Nimen pitää olla enemmän kuin 2 merkkiä.",
-  }),
-  email: z
-    .string()
-    .email({ message: "Sähköpostin pitää olla oikeassa muodossa." }),
-  description: z.string().min(4, {
-    message: "Kuvauksen pitää olla enemmän kuin 4 merkkiä.",
-  }),
-});
+const ERROR_MESSAGE =
+  "Viestin lähetys epäonnistui. Ole hyvä ja yritä uudelleen.";
 
 export const ContactForm = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -48,13 +40,7 @@ export const ContactForm = () => {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!canSubmit) {
-      return;
-    }
-
-    setCanSubmit(false);
-
+  async function sendEmail(values: z.infer<typeof formSchema>) {
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -65,19 +51,35 @@ export const ContactForm = () => {
       const data = await response.json();
 
       if (!data.message || !response.ok) {
-        toast.error("Viestin lähetys epäonnistui.");
+        throw Error();
       }
 
-      if (data.message) {
-        toast.success(data.message);
-      }
-    } catch (error) {
-      toast.error("Viestin lähetys epäonnistui.");
+      return data;
+    } catch (error: any) {
+      throw Error(ERROR_MESSAGE);
     }
+  }
 
-    setTimeout(() => {
-      setCanSubmit(true);
-    }, 5000);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setCanSubmit(false);
+
+    const sendEmailPromise = sendEmail(values);
+
+    toast.promise(sendEmailPromise, {
+      loading: "Lähetetään viestiä...",
+      success: (data) => {
+        setTimeout(() => {
+          setCanSubmit(true);
+        }, 5000);
+        return data.message;
+      },
+      error: (error) => {
+        setTimeout(() => {
+          setCanSubmit(true);
+        }, 1000);
+        return error.message;
+      },
+    });
   }
 
   return (
@@ -97,7 +99,7 @@ export const ContactForm = () => {
                 <FormItem>
                   <FormLabel>Nimi</FormLabel>
                   <FormControl>
-                    <Input placeholder="Nimi" {...field} />
+                    <Input placeholder="Nimi" type="text" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -110,7 +112,11 @@ export const ContactForm = () => {
                 <FormItem>
                   <FormLabel>Sähköposti</FormLabel>
                   <FormControl>
-                    <Input placeholder="nimi@sähköposti.fi" {...field} />
+                    <Input
+                      placeholder="nimi@sähköposti.fi"
+                      type="email"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

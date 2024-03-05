@@ -1,6 +1,7 @@
 import { H2 } from "@/components/h2";
 import { P } from "@/components/p";
 import { Section } from "@/components/section";
+import heroImage from "@/public/logo.png";
 
 export const ContactInfo = () => {
   return (

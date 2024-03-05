@@ -14,7 +14,6 @@ export const Navbar = () => {
               className="flex gap-2 group"
               aria-label="Mene etusivulle"
             >
-              Putkivuori
               <img
                 src="/logo.png"
                 alt=""
@@ -23,6 +22,7 @@ export const Navbar = () => {
                 height={32}
                 className="object-contain w-8 flex group-[:hover]:opacity-50 duration-200"
               />
+              Putkivuori
             </Link>
           </div>
           <div className="flex flex-1">
@@ -41,10 +41,10 @@ export const Navbar = () => {
           <div className="sm:hidden flex">
             <MobileMenu />
           </div>
-          <div className="hidden sm:flex">
+          <div className="hidden sm:flex items-center">
             <a
               href="/#ota-yhteytta"
-              className={`${buttonVariants({ variant: "default", size: "sm" })} flex items-center justify-center h-full`}
+              className={`${buttonVariants({ variant: "default", size: "sm" })} flex items-center justify-center `}
             >
               Ota Yhteyttä
             </a>
