@@ -11,8 +11,8 @@ export const Hero = ({ children }: { children: React.ReactNode }) => {
       >
         <div className="relative flex flex-col w-full">
           <div className="flex flex-col w-full gap-2">
-            <div className="flex items-center gap-4 sm:gap-8">
-              <h1 className="sm:text-7xl text-4xl font-extrabold -indent-1">
+            <div className="flex sm:flex-row flex-wrap-reverse items-center gap-4 sm:gap-8">
+              <h1 className="sm:text-7xl text-5xl font-extrabold -indent-1">
                 Putkivuori
               </h1>
               <img
